@@ -15,7 +15,7 @@ Analyzing the Correlation Between Unemployment Rates and Crime Incidents in the 
 
 <!-- Describe your data science project in max. 200 words. Consider writing about why and how you attempt it. -->
 
-The project investigates the dependence of unemployment rates on crime incidents in different states in the USA over a decade-from 2004 to 2014. Using the available Kaggle datasets, one seeks to determine patterns and correlations that could provide an insight into socioeconomic factors affecting crime rates. Therefore, the objective of this paper is to explore whether there is any significant correlation between unemployment rates and crime incidents within the period under study. The project also tends to point out the states with high correlations, temporal changes, and overall trends. The methodology involves downloading and cleaning the datasets, converting month data to a consistent format, filtering data for the years 2004 to 2014, merging unemployment and crime data, calculating incident sums for each state and year, and performing statistical analysis to measure the correlations. Then, the project will identify the periods and states with high variations or high correlations in unemployment and crime rates. Graphical representations depicting the findings will be developed, as well as the compilation of actionable insights in a comprehensive report. A deeper understanding of the linkage between unemployment and crime may help to drive policy actions for economic and social programs that help keep crime in check. The project provides valuable insights for researchers, policymakers, and social scientists who would want to address the complex interplay between economic conditions and crime in the USA by placing it within a historical perspective.
+The project investigates the relationship between unemployment rates and crime incidents in different states in the USA from 2004 to 2014. Using Kaggle datasets, it aims to uncover patterns and correlations that provide insights into socioeconomic factors affecting crime rates. The objective is to determine if there is a significant correlation between unemployment rates and crime incidents. Additionally, the project identifies states with high correlations, temporal changes, and overall trends. The methodology includes downloading and cleaning datasets, converting month data to a consistent format, filtering data for 2004 to 2014, merging unemployment and crime data, calculating incident sums for each state and year, and performing statistical analysis to measure correlations. The project will pinpoint periods and states with high variations in unemployment and crime rates. Graphical representations will illustrate the findings, and a comprehensive report will compile actionable insights. Understanding the linkage between unemployment and crime can drive policy actions for economic and social programs to help mitigate crime. This project provides valuable insights for researchers, policymakers, and social scientists.
 
 ## Datasources
 
@@ -44,8 +44,7 @@ There are 638454 records and 24 Columns of record.
 ## Work Packages
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
-
-##PACKAGES:
+PACKAGES:
 
 Python3
 
@@ -58,7 +57,7 @@ SQLite3
 Kaggle API
 
 
-##TASK:
+## TASK:
 
 1. Extract datasets using Kaggle API: Download unemployment and crime datasets from Kaggle using the kagglehub library. [#1][i1]
 
