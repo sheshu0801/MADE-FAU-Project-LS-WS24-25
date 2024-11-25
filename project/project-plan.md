@@ -45,7 +45,7 @@ There are 638454 records and 24 Columns of record.
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
-PACKAGES:
+##PACKAGES:
 
 Python3
 
@@ -58,7 +58,7 @@ SQLite3
 Kaggle API
 
 
-TASK:
+##TASK:
 
 1. Extract datasets using Kaggle API: Download unemployment and crime datasets from Kaggle using the kagglehub library. [#1][i1]
 
@@ -68,4 +68,3 @@ TASK:
 
 4. Data Aggregation: Aggregate crime incidents by state and year, summing incidents and calculating mean unemployment rates.
 
-[i1]: 
