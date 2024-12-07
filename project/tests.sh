@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Running the data pipeline
-python3 pipeline_script.py
+python3 pipeline.py
 
 # Check if the output CSV file exists
 if [ -f "/Users/sheshukumar/data/raw_csv/Yearly_Aggregated_Unemployment_Crime_Data.csv" ]; then
