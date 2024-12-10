@@ -16,16 +16,26 @@ class Pipeline:
         print("Path to crime dataset files:", crime_path)
         
         # Listing files in the directories
-        print("Unemployment dataset files:", os.listdir(unemployment_path))
-        print("Crime dataset files:", os.listdir(crime_path))
+        unemployment_files = os.listdir(unemployment_path)
+        crime_files = os.listdir(crime_path)
+        print("Unemployment dataset files:", unemployment_files)
+        print("Crime dataset files:", crime_files)
         
+        # Check if the directories are empty
+        if not unemployment_files:
+            print("Error: Unemployment dataset directory is empty.")
+            return
+        if not crime_files:
+            print("Error: Crime dataset directory is empty.")
+            return
+
         # Moving the datasets to the desired directory
         data_dir = './data/raw_csv/'
         os.makedirs(data_dir, exist_ok=True)
 
         # Use the actual file names from the directory listings
-        unemployment_data_file = os.listdir(unemployment_path)[0]  # Assuming there's only one file
-        crime_data_file = os.listdir(crime_path)[0]  # Assuming there's only one file
+        unemployment_data_file = unemployment_files[0]  # Assuming there's only one file
+        crime_data_file = crime_files[0]  # Assuming there's only one file
 
         unemployment_data_path = os.path.join(unemployment_path, unemployment_data_file)
         crime_data_path = os.path.join(crime_path, crime_data_file)
