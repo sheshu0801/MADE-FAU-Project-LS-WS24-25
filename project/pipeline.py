@@ -23,12 +23,15 @@ class Pipeline:
         data_dir = './data/raw_csv/'
         os.makedirs(data_dir, exist_ok=True)
 
-        # Using the actual file names from the directory listings 
-        unemployment_data_file = 'Unemployment in America Per US State.csv'
-        crime_data_file = 'US_Crime_DataSet.csv'
+        # Use the actual file names from the directory listings
+        unemployment_data_file = os.listdir(unemployment_path)[0]  # Assuming there's only one file
+        crime_data_file = os.listdir(crime_path)[0]  # Assuming there's only one file
 
         unemployment_data_path = os.path.join(unemployment_path, unemployment_data_file)
         crime_data_path = os.path.join(crime_path, crime_data_file)
+
+        print(f"Unemployment data path: {unemployment_data_path}")
+        print(f"Crime data path: {crime_data_path}")
 
         os.rename(unemployment_data_path, os.path.join(data_dir, 'Unemployment_in_America.csv'))
         os.rename(crime_data_path, os.path.join(data_dir, 'US_Crime_DataSet.csv'))
