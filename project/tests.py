@@ -1,41 +1,47 @@
 import os
-import sqlite3
 import pandas as pd
+import sqlite3
 
 def run_pipeline():
     os.system('python3 pipeline.py')
 
-def check_output_file():
-    return os.path.isfile('/Users/sheshukumar/data/Unemployment_Crime_Data.sqlite')
+def check_output_files():
+    csv_path = '/Users/sheshukumar/data/raw_csv/Yearly_Aggregated_Unemployment_Crime_Data.csv'
+    sqlite_path = './data/Unemployment_Crime_Data.sqlite'
+    return os.path.isfile(csv_path) and os.path.isfile(sqlite_path)
 
-def check_table_data():
-    conn = sqlite3.connect('/Users/sheshukumar/data/Unemployment_Crime_Data.sqlite')
-    query = "SELECT * FROM stops"
-    df = pd.read_sql_query(query, conn)
-    conn.close()
+def check_unemployment_data():
+    conn_unemployment = sqlite3.connect('./data/Unemployment_Crime_Data.sqlite')
+    processed_unemployment_data = pd.read_sql_query("SELECT * FROM YearlyAggregatedUnemploymentCrimeData", conn_unemployment)
+    conn_unemployment.close()
     
-    if df.empty:
-        return False
+    print(f"Number of records in YearlyAggregatedUnemploymentCrimeData: {len(processed_unemployment_data)}")
     
-    # Check data validity
-    valid_stop_name = df['stop_name'].apply(lambda x: isinstance(x, str) and bool(re.match(r'^[a-zA-ZäöüÄÖÜß ]+$', x)))
-    valid_lat = df['stop_lat'].between(-90, 90)
-    valid_lon = df['stop_lon'].between(-90, 90)
+    # Check that the DataFrame has the expected number of columns (4)
+    assert processed_unemployment_data.shape[1] == 4, "Table does not have 4 columns"
     
-    return valid_stop_name.all() and valid_lat.all() and valid_lon.all()
+    # Check if columns exist
+    expected_columns = ['State', 'Year', 'Percent (%) of Labor Force Unemployed in State/Area', 'Incident']
+    for column in expected_columns:
+        assert column in processed_unemployment_data.columns, f"Missing column: {column}"
+    
+    # Checking data types
+    assert pd.api.types.is_string_dtype(processed_unemployment_data['State']), "State is not a string"
+    assert pd.api.types.is_integer_dtype(processed_unemployment_data['Year']), "Year is not an integer"
+    assert pd.api.types.is_float_dtype(processed_unemployment_data['Percent (%) of Labor Force Unemployed in State/Area']), "Percent (%) of Labor Force Unemployed in State/Area is not a float"
+    assert pd.api.types.is_integer_dtype(processed_unemployment_data['Incident']), "Incident is not an integer"
+    
+    print("All tests passed for YearlyAggregatedUnemploymentCrimeData")
 
 def main():
     run_pipeline()
     
-    if not check_output_file():
-        print("Test failed: Output file does not exist.")
+    if not check_output_files():
+        print("Test failed: Output files do not exist.")
         return
     
-    if not check_table_data():
-        print("Test failed: Data in the 'stops' table is not valid.")
-        return
-    
-    print("All tests passed.")
+    check_unemployment_data()
 
 if __name__ == "__main__":
+    print("Test cases running")
     main()
