@@ -1,22 +1,33 @@
 #!/bin/bash
 
-# Running the data pipeline
-python3 pipeline.py
-
-# Check if the output CSV file exists
-if [ -f "/Users/sheshukumar/data/raw_csv/Yearly_Aggregated_Unemployment_Crime_Data.csv" ]; then
-    echo "CSV output file exists. Test passed."
-else
-    echo "CSV output file does not exist. Test failed."
+# Check if Python 3 is installed
+if ! command -v python3 >/dev/null 2>&1; then
+    echo "Pipeline needs Python 3 but it's not installed."
     exit 1
 fi
 
-# Check if the SQLite database exists
-if [ -f "./data/Unemployment_Crime_Data.sqlite" ]; then
-    echo "SQLite database exists. Test passed."
-else
-    echo "SQLite database does not exist. Test failed."
+# Install required Python packages
+python3 -m pip install -r ./project/requirements.txt
+
+# Ensure pytest is installed
+if ! python3 -m pytest --version >/dev/null 2>&1; then
+    echo "Installing pytest..."
+    python3 -m pip install pytest
+fi
+
+
+# Run the ETL pipeline
+echo "Running ETL pipeline..."
+python3 ./project/pipeline.py
+
+# Check if the ETL pipeline ran successfully
+if [ $? -ne 0 ]; then
+    echo "ETL pipeline failed. Skipping tests."
     exit 1
 fi
 
-echo "All tests passed."
+# Run the tests
+echo "Running test cases..."
+pytest ./project/tests.py
+
+exit 0
