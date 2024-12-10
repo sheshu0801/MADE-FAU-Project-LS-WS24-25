@@ -20,12 +20,12 @@ class Pipeline:
         print("Crime dataset files:", os.listdir(crime_path))
         
         # Moving the datasets to the desired directory
-        data_dir = '/Users/sheshukumar/data/raw_csv/'
+        data_dir = './data/raw_csv/'
         os.makedirs(data_dir, exist_ok=True)
 
         # Using the actual file names from the directory listings 
-        unemployment_data_file = '/Users/sheshukumar/data/raw_csv/Unemployment_in_America.csv'
-        crime_data_file = '/Users/sheshukumar/data/raw_csv/US_Crime_DataSet.csv'
+        unemployment_data_file = 'Unemployment in America Per US State.csv'
+        crime_data_file = 'US_Crime_DataSet.csv'
 
         unemployment_data_path = os.path.join(unemployment_path, unemployment_data_file)
         crime_data_path = os.path.join(crime_path, crime_data_file)
@@ -35,8 +35,8 @@ class Pipeline:
 
     def transform_data(self):
         # Defining the paths to CSV files
-        unemployment_data_path = '/Users/sheshukumar/data/raw_csv/Unemployment_in_America.csv'
-        crime_data_path = '/Users/sheshukumar/data/raw_csv/US_Crime_DataSet.csv'
+        unemployment_data_path = './data/raw_csv/Unemployment_in_America.csv'
+        crime_data_path = './data/raw_csv/US_Crime_DataSet.csv'
 
         df_unemployment = pd.read_csv(unemployment_data_path, delimiter=',')
         df_crime = pd.read_csv(crime_data_path, delimiter=',', low_memory=False)
@@ -101,7 +101,7 @@ class Pipeline:
         print(yearly_incidents_df.head())
 
         # Save the yearly aggregated dataframe to a CSV file
-        yearly_incidents_df.to_csv('/Users/sheshukumar/data/raw_csv/Yearly_Aggregated_Unemployment_Crime_Data.csv', index=False)
+        yearly_incidents_df.to_csv('./data/raw_csv/Yearly_Aggregated_Unemployment_Crime_Data.csv', index=False)
 
         # Save to SQLite
         conn = sqlite3.connect('./data/Unemployment_Crime_Data.sqlite')
