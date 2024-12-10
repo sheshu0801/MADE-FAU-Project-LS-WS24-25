@@ -31,4 +31,17 @@ def check_unemployment_data():
     assert pd.api.types.is_float_dtype(processed_data['Percent (%) of Labor Force Unemployed in State/Area']), "Percent (%) of Labor Force Unemployed in State/Area is not a float"
     assert pd.api.types.is_integer_dtype(processed_data['Incident']), "Incident is not an integer"
     
-    print("All tests passed for Year[_{{{CITATION{{{_1{](https://github.com/gtfamily/gtfamily/tree/d8389b4fb96ef9ec367a97731351039aa0664e18/plugin.video.SportsDevil%2Flib%2Futils%2FdatetimeUtils.py)
+    print("All tests passed for YearlyAggregatedUnemploymentCrimeData")
+
+def main():
+    run_pipeline()
+    
+    if not check_output_files():
+        print("Test failed: Output files do not exist.")
+        return
+    
+    check_unemployment_data()
+
+if __name__ == "__main__":
+    print("Test cases running")
+    main()
